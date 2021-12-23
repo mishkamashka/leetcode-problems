@@ -1,0 +1,59 @@
+// Runtime: 8 ms, faster than 69.77% of Go online submissions for Integer to Roman.
+// Memory Usage: 4.3 MB, less than 16.59% of Go online submissions for Integer to Roman.
+
+func intToRoman(num int) string {
+    
+    numbers := map[int]string {
+        1:"I",
+        5:"V",
+        10:"X",
+        50:"L",
+        100:"C",
+        500:"D",
+        1000:"M",
+    }
+    
+    result := ""
+    
+    for i := 0; num > 0; i++ {
+        c := num % 10
+        num /= 10
+        
+        switch c {
+        case 1, 2, 3:
+            for j := c; j != 0; j-- {
+                result = fmt.Sprintf("%s%s", numbers[1*pow(i)], result)
+            }
+            
+        case 4:
+            result = fmt.Sprintf("%s%s%s", numbers[1*pow(i)], numbers[5*pow(i)], result)
+            
+        case 5:
+            result = fmt.Sprintf("%s%s", numbers[5*pow(i)], result)
+        
+        case 6,7,8:
+            for j := 5; j != c; j++ {
+                result = fmt.Sprintf("%s%s", numbers[1*pow(i)], result)
+            }
+            
+            result = fmt.Sprintf("%s%s", numbers[5*pow(i)], result)
+            
+        case 9:
+            result = fmt.Sprintf("%s%s%s", numbers[1*pow(i)], numbers[10*pow(i)], result)
+        }
+        
+    }
+    
+    return result
+    
+}
+
+func pow(p int) int {
+    r := 1
+    
+    for i := 0; i < p; i++ {
+       r *= 10 
+    }
+    
+    return r
+}
