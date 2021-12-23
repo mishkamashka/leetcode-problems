@@ -1,0 +1,32 @@
+// Runtime: 32 ms, faster than 91.04% of Go online submissions for Binary Search.
+// Memory Usage: 6.9 MB, less than 97.63% of Go online submissions for Binary Search.
+
+func search(nums []int, target int) int {
+    start := 0
+    end := len(nums)-1
+    
+    if nums[start] == target {
+        return start
+    }
+    
+    if nums[end] == target {
+        return end
+    }
+    
+    for end >= start {
+    
+        m := start + (end - start) / 2
+        
+        if target == nums[m] {
+            return m
+        }
+        
+        if target > nums[m] {
+            start = m+1
+        } else {
+            end = m-1
+        }
+    }
+    
+    return -1
+}

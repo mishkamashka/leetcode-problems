@@ -1,0 +1,64 @@
+// Runtime: 12 ms, faster than 81.47% of Go online submissions for Palindrome Number.
+// Memory Usage: 6.6 MB, less than 9.71% of Go online submissions for Palindrome Number.
+
+//my first solution
+
+func isPalindrome(x int) bool {
+    v := x
+    
+    if 0 <= x && x < 10 {
+        return true
+    }
+    
+    if x < 0 ||  x%10 == 0 {
+        return false
+    }
+    
+    nums := make([]int, 0)
+    
+    for x >= 1 {
+        n := x % 10
+        
+        nums = append(nums, n)
+        
+        x = x / 10
+    }
+    
+    
+    xback := nums[len(nums)-1]
+    k := 10
+    for i := len(nums)-2; i >= 0; i-- {
+        xback += nums[i]*k
+        
+        k *=10
+    }
+    
+    return xback==v
+    
+}
+
+
+// suggested by leetcode solution (my solution may encounter int overflow whn maxint reverted)
+
+// Runtime: 20 ms, faster than 46.22% of Go online submissions for Palindrome Number.
+// Memory Usage: 5 MB, less than 87.42% of Go online submissions for Palindrome Number.
+
+func isPalindrome(x int) bool {    
+    if 0 <= x && x < 10 {
+        return true
+    }
+    
+    if x < 0 ||  x%10 == 0 {
+        return false
+    }
+    
+    xback := 0
+    
+    for xback < x {
+        xback = xback * 10 + x % 10
+        
+        x /= 10
+    }
+    
+    return x == xback || x == xback/10
+}

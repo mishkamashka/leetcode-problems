@@ -1,0 +1,21 @@
+// Runtime: 0 ms, faster than 100.00% of Go online submissions for Longest Common Prefix.
+// Memory Usage: 2.4 MB, less than 34.98% of Go online submissions for Longest Common Prefix.
+
+
+func longestCommonPrefix(strs []string) string {
+    prefix := ""
+    
+    
+    for i := 0; i < len(strs[0]); i++ {
+        prefix = fmt.Sprintf("%s%s", prefix, string(strs[0][i]))
+        
+        for j := 1; j < len(strs); j++ {
+            if !strings.HasPrefix(strs[j], prefix) {
+                return prefix[:len(prefix)-1]
+            }
+        }
+        
+    }
+    
+    return prefix
+}
